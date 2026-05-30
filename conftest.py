@@ -1,5 +1,6 @@
 import pytest
 from selenium import webdriver
+from selenium.webdriver.firefox.options import Options as FirefoxOptions
 
 @pytest.fixture(params=["chrome", "firefox"])
 def driver(request):
@@ -9,7 +10,10 @@ def driver(request):
         driver = webdriver.Chrome()
     elif browser_name == "firefox":
         driver = webdriver.Firefox()
-
+        
     driver.set_window_size(1920, 1080)
-    yield driver
-    driver.quit()
+    
+    try:
+        yield driver
+    finally:
+        driver.quit()

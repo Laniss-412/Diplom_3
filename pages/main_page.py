@@ -30,6 +30,44 @@ class MainPage(BasePage):
     def drag_and_drop_ingredient_to_order(self):
         ingredient = self.find_element(MainPageLocators.INGREDIENT_CARD)
         basket = self.find_element(MainPageLocators.SECTION_BASKET)
-
-        actions = ActionChains(self.driver)
-        actions.drag_and_drop(ingredient, basket).perform()
+        
+        if "firefox" in self.driver.name.lower():
+            js_script = """
+            var source = arguments[0];
+            var target = arguments[1];
+            
+            function createEvent(type) {
+                var event = document.createEvent('CustomEvent');
+                event.initCustomEvent(type, true, true, null);
+                event.dataTransfer = {
+                    data: {},
+                    setData: function(type, val) { this.data[type] = val; },
+                    getData: function(type) { return this.data[type]; }
+                };
+                return event;
+            }
+            
+            function dispatch(element, type, event) {
+                if (element.dispatchEvent) { element.dispatchEvent(event); }
+            }
+            
+            var dragStartEvent = createEvent('dragstart');
+            dispatch(source, 'dragstart', dragStartEvent);
+            
+            var dragOverEvent = createEvent('dragover');
+            dragOverEvent.dataTransfer = dragStartEvent.dataTransfer;
+            dispatch(target, 'dragover', dragOverEvent);
+            
+            var dropEvent = createEvent('drop');
+            dropEvent.dataTransfer = dragStartEvent.dataTransfer;
+            dispatch(target, 'drop', dropEvent);
+            
+            var dragEndEvent = createEvent('dragend');
+            dragEndEvent.dataTransfer = dragStartEvent.dataTransfer;
+            dispatch(source, 'dragend', dragEndEvent);
+            """
+            self.driver.execute_script(js_script, ingredient, basket)
+        else:
+            actions = ActionChains(self.driver)
+            actions.drag_and_drop(ingredient, basket).perform()
+            

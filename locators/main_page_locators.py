@@ -9,7 +9,7 @@ class MainPageLocators:
     ORDER_FEED_BUTTON = (By.XPATH, ".//p[text()='Лента Заказов']")
     
     #Первый ингридиент со страницы "Флюорисцентеная булка R2-D3"
-    INGREDIENT_CARD = (By.XPATH, ".//a[.//p[text()='Флюоресцентная булка R2-D3']]")
+    INGREDIENT_CARD = (By.XPATH, "//a[.//p[text()='Флюоресцентная булка R2-D3']]")
     
     #Заголовок всплывающего окна "Детали ингредиента"
     INGREDIENT_HEADER = (By.XPATH, ".//h2[text()='Детали ингредиента']")
@@ -18,7 +18,7 @@ class MainPageLocators:
     CLOSE_BUTTON = (By.XPATH, ".//button[contains(@class, 'Modal_modal__close')]")
     
     #Счетчик на карточке ингридиента
-    INGREDIENT_COUNTER = (By.XPATH, ".//a[.//p[text()='Флюоресцентная булка R2-D3']]/div/p")
+    INGREDIENT_COUNTER = (By.XPATH, "//p[contains(@class, 'counter_counter__num')]")
     
     #Область куда нужно перетаскивать ингредиент
     SECTION_BASKET = (By.XPATH, ".//section[contains(@class, 'BurgerConstructor_basket')]")
