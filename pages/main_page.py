@@ -71,3 +71,9 @@ class MainPage(BasePage):
             actions = ActionChains(self.driver)
             actions.drag_and_drop(ingredient, basket).perform()
             
+    
+    def click_make_order_button(self):
+        self.click_element(MainPageLocators.MAKE_ORDER_BUTTON)
+
+    def get_created_order_number(self):
+        return self.get_text_from_element(MainPageLocators.ORDER_NUMBER)

@@ -1,0 +1,1 @@
+{"total":2,"items":[{"uid":"451d3c97a6cc70ef1d295a27ec3d5519","name":"Конструктор на главной странице","statistic":{"failed":0,"broken":0,"skipped":0,"passed":8,"unknown":0,"total":8}},{"uid":"c101bfbc7784de1e0ba717910a6ed65b","name":"Страница 'Лента заказов'","statistic":{"failed":0,"broken":0,"skipped":0,"passed":6,"unknown":0,"total":6}}]}

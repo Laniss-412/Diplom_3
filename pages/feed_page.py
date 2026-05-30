@@ -13,10 +13,9 @@ class FeedPage(BasePage):
     def get_orders_in_work_list(self):
         self.find_element(FeedPageLocators.ORDERS_IN_WORK)
         elements = self.driver.find_elements(*FeedPageLocators.ORDERS_IN_WORK)
-        clean_number_list = []
+        numbers_list = []
 
         for el in elements:
-            clean_text = el.text.replace("0\n", "")
-            clean_number_list.append(clean_text)
+            numbers_list.append(el.text)
 
-        return clean_number_list
+        return numbers_list

@@ -24,7 +24,7 @@ class MainPageLocators:
     SECTION_BASKET = (By.XPATH, ".//section[contains(@class, 'BurgerConstructor_basket')]")
     
     #Кнопка "Оформить заказ"
-    PLACE_AN_ORDER_BUTTON = (By.XPATH, ".//button[text()='Оформить заказ']")
+    MAKE_ORDER_BUTTON = (By.XPATH, ".//button[text()='Оформить заказ']")
 
     #Текст с номером заказа
     ORDER_NUMBER = (By.XPATH, ".//h2[contains(@class, 'Modal_modal__title')]")
