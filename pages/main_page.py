@@ -1,7 +1,5 @@
 from pages.base_page import BasePage
 from locators.main_page_locators import MainPageLocators
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver import ActionChains
 
 class MainPage(BasePage):
@@ -16,13 +14,13 @@ class MainPage(BasePage):
         self.click_element(MainPageLocators.INGREDIENT_CARD)
 
     def is_ingredient_modal_visible(self):
-        return self.find_element(MainPageLocators.INGREDIENT_HEADER).is_displayed()
+        return self.is_element_visible(MainPageLocators.INGREDIENT_HEADER)
     
     def click_close_modal(self):
         self.click_element(MainPageLocators.CLOSE_BUTTON)
 
     def is_modal_closed(self):
-        return self.wait.until(EC.invisibility_of_element_located(MainPageLocators.INGREDIENT_HEADER))
+        return self.wait_for_element_to_be_invisible(MainPageLocators.INGREDIENT_HEADER)
     
     def get_ingredient_counter_value(self):
         return self.get_text_from_element(MainPageLocators.INGREDIENT_COUNTER)
@@ -66,14 +64,15 @@ class MainPage(BasePage):
             dragEndEvent.dataTransfer = dragStartEvent.dataTransfer;
             dispatch(source, 'dragend', dragEndEvent);
             """
-            self.driver.execute_script(js_script, ingredient, basket)
+            self.execute_script(js_script, ingredient, basket)
         else:
-            actions = ActionChains(self.driver)
-            actions.drag_and_drop(ingredient, basket).perform()
+            self.drag_and_drop_elements(ingredient, basket)
             
     
     def click_make_order_button(self):
         self.click_element(MainPageLocators.MAKE_ORDER_BUTTON)
 
     def get_created_order_number(self):
+        self.wait_for_valid_order_number(MainPageLocators.ORDER_NUMBER)
         return self.get_text_from_element(MainPageLocators.ORDER_NUMBER)
+    
