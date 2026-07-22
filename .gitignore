@@ -9,6 +9,7 @@ __pycache__/
 .pytest_cache/
 .mypy_cache/
 
+allure-report/
 allure-results/
 
 .idea/
